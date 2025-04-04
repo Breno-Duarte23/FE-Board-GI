@@ -1,14 +1,44 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig'; // Ajuste o caminho se necessário
+
+
 
 const TelaLogin = () => {
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+
+    const handleLogin = () => {
+            signInWithEmailAndPassword(auth, email, senha)
+        .then(userCredential => {
+            const user = userCredential.user;
+            Alert.alert('Login realizado com sucesso!', `Bem-vindo, ${user.email}`);
+        })
+        .catch(error => {
+            Alert.alert('Erro ao fazer login', error.message);
+        });
+    };
+
     return (
         <View style={styles.mainContainer}>
             <Image style={styles.imgLogin} source={require('../../assets/Logo Gente Inocente.png')} />
             <View style={styles.formLogin}>
-                <TextInput style={styles.inputForm} placeholder='Usuário ' />
-                <TextInput secureTextEntry={true} style={styles.inputForm} placeholder='Senha' />
-                <TouchableOpacity style={styles.buttonForm}>
+                <TextInput
+                    style={styles.inputForm}
+                    placeholder='Usuário'
+                    onChangeText={setEmail}
+                    value={email}
+                    autoCapitalize='none'
+                />
+                <TextInput
+                    secureTextEntry={true}
+                    style={styles.inputForm}
+                    placeholder='Senha'
+                    onChangeText={setSenha}
+                    value={senha}
+                />
+                <TouchableOpacity style={styles.buttonForm} onPress={handleLogin}>
                     <Text style={styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>
                 <Text style={{ alignSelf: 'center', marginTop: 15 }}>Esqueci minha senha</Text>
@@ -16,7 +46,7 @@ const TelaLogin = () => {
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -44,8 +74,8 @@ const styles = StyleSheet.create({
         margin: 12,
         padding: 5,
         fontSize: 18,
-        borderWidth: 0, // Remove todas as bordas
-        borderBottomWidth: 2, // Mantém apenas a borda inferior
+        borderWidth: 0,
+        borderBottomWidth: 2,
         borderBottomColor: '#bfbfbb',
     },
     buttonForm: {
