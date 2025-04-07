@@ -3,9 +3,7 @@ import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } fro
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebaseConfig'; // Ajuste o caminho se necessário
 
-
-
-const TelaLogin = () => {
+const TelaLogin = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
@@ -13,7 +11,8 @@ const TelaLogin = () => {
             signInWithEmailAndPassword(auth, email, senha)
         .then(userCredential => {
             const user = userCredential.user;
-            Alert.alert('Login realizado com sucesso!', `Bem-vindo, ${user.email}`);
+            //Alert.alert('Login realizado com sucesso!', `Bem-vindo, ${user.email}`);
+            navigation.navigate("TelaInicial");
         })
         .catch(error => {
             Alert.alert('Erro ao fazer login', error.message);
@@ -22,7 +21,7 @@ const TelaLogin = () => {
 
     return (
         <View style={styles.mainContainer}>
-            <Image style={styles.imgLogin} source={require('../../assets/Logo Gente Inocente.png')} />
+            <Image style={styles.imgLogin} source={require('../../assets/LogoGISemFundo.png')} />
             <View style={styles.formLogin}>
                 <TextInput
                     style={styles.inputForm}
