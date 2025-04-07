@@ -30,41 +30,40 @@ const TelaInicial = ({ navigation }) => {
                 </TouchableOpacity>
                 <View style={styles.btnsContainer}>
                     <View>
-                        <TouchableOpacity style={styles.mainBtnTouchable}>
+                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Recados')}>
                             <Image style={styles.imgMainButton} source={require('../../assets/book.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Recados</Text>
                     </View>
-                    
                     <View>
-                        <TouchableOpacity style={styles.mainBtnTouchable}>
+                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Comunicados')}>
                             <Image style={styles.imgMainButton} source={require('../../assets/comunicados.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Comunicados</Text>
                     </View>
                     <View >
                         <TouchableOpacity style={styles.mainBtnTouchable}>
-                            <Image style={styles.imgMainButton} source={require('../../assets/book.png')} />
+                            <Image style={styles.imgMainButton} source={require('../../assets/ocorrencias.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Ocorrências</Text>
                     </View>
                     <View >
                         <TouchableOpacity style={styles.mainBtnTouchable}>
-                            <Image style={styles.imgMainButton} source={require('../../assets/book.png')} />
+                            <Image style={styles.imgMainButton} source={require('../../assets/aluno.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Aluno</Text>
                     </View>
                     <View >
                         <TouchableOpacity style={styles.mainBtnTouchable}>
-                            <Image style={styles.imgMainButton} source={require('../../assets/book.png')} />
+                            <Image style={styles.imgMainButton} source={require('../../assets/calendario.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Calendário</Text>
                     </View>
                     <View >
                         <TouchableOpacity style={styles.mainBtnTouchable}>
-                            <Image style={styles.imgMainButton} source={require('../../assets/book.png')} />
+                            <Image style={styles.imgMainButton} source={require('../../assets/dadosDoALuno.png')} />
                         </TouchableOpacity>
-                        <Text style={styles.labelBtn} numberOfLines={1}></Text>
+                        <Text style={styles.labelBtn} numberOfLines={1}>Dados do aluno</Text>
                     </View>
                 </View>
             </View>
@@ -133,9 +132,9 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     labelBtn: {
-        //marginTop: 8,
-        fontSize: 20,
-        color: '#333',
+        marginTop: 4,
+        fontSize: 18,
+        color: '#49688d',
         textAlign: 'center',
         fontWeight: '600',
     },
