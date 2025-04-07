@@ -42,28 +42,16 @@ const TelaInicial = ({ navigation }) => {
                         <Text style={styles.labelBtn} numberOfLines={1}>Comunicados</Text>
                     </View>
                     <View >
-                        <TouchableOpacity style={styles.mainBtnTouchable}>
-                            <Image style={styles.imgMainButton} source={require('../../assets/ocorrencias.png')} />
-                        </TouchableOpacity>
-                        <Text style={styles.labelBtn} numberOfLines={1}>Ocorrências</Text>
-                    </View>
-                    <View >
-                        <TouchableOpacity style={styles.mainBtnTouchable}>
+                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Aluno')}>
                             <Image style={styles.imgMainButton} source={require('../../assets/aluno.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Aluno</Text>
                     </View>
                     <View >
-                        <TouchableOpacity style={styles.mainBtnTouchable}>
+                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Calendario')}>
                             <Image style={styles.imgMainButton} source={require('../../assets/calendario.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Calendário</Text>
-                    </View>
-                    <View >
-                        <TouchableOpacity style={styles.mainBtnTouchable}>
-                            <Image style={styles.imgMainButton} source={require('../../assets/dadosDoALuno.png')} />
-                        </TouchableOpacity>
-                        <Text style={styles.labelBtn} numberOfLines={1}>Dados do aluno</Text>
                     </View>
                 </View>
             </View>

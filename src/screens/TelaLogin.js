@@ -25,7 +25,7 @@ const TelaLogin = ({ navigation }) => {
             <View style={styles.formLogin}>
                 <TextInput
                     style={styles.inputForm}
-                    placeholder='Usuário'
+                    placeholder='E-mail'
                     onChangeText={setEmail}
                     value={email}
                     autoCapitalize='none'
