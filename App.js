@@ -11,9 +11,6 @@ import EsqueciMinhaSenha from './src/screens/EsqueciMinhaSenha';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-
-
-
 const App = () => {
 
   const Stack = createStackNavigator();
