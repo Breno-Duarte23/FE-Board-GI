@@ -46,7 +46,7 @@ const TelaInicial = ({ navigation }) => {
                         <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Aluno')}>
                             <Image style={styles.imgMainButton} source={require('../../assets/aluno.png')} />
                         </TouchableOpacity>
-                        <Text style={styles.labelBtn} numberOfLines={1}>Aluno</Text>
+                        <Text style={styles.labelBtn} numberOfLines={1}>Alunos</Text>
                     </View>
                     <View >
                         <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Calendario')}>

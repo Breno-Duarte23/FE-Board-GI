@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
+import Header from '../components/Header';
 
 const Ocorrencias = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={()=> navigation.navigate('Aluno')}>
-                    <Image style={styles.backArrow} source={require('../../assets/seta-esquerda.png')} />
-                </TouchableOpacity>
-                <Text style={styles.headerText}>Ocorrências</Text>
-                <Image style={styles.headerImg} source={require('../../assets/LogoGISemFundo.png')} />
+            <View>
+                <Header title="Ocorrências" onBackPress={() => navigation.navigate('TelaInicial')} />
+                <Text style={styles.text}>Ocorrencias</Text>
             </View>
-            <Text style={styles.text}>Ocorrencias</Text>
         </View>
     );
 };

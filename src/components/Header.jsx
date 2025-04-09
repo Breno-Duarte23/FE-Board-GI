@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import TelaInicial from './../screens/TelaInicial';
 
-const header = ({ title, onBackPress }) => {
+const Header = ({ title, onBackPress, navigation }) => {
     return (
         <View style={styles.header}>
             <TouchableOpacity onPress={onBackPress}>
                 <Image style={styles.backArrow} source={require('../../assets/seta-esquerda.png')} />
             </TouchableOpacity>
             <Text style={styles.headerText}>{title}</Text>
-            <Image style={styles.headerImg} source={require('../../assets/LogoGISemFundo.png')} />
+            <TouchableOpacity onPress={() => navigation.navigate('TelaInicial')}>
+                <Image style={styles.headerImg} source={require('../../assets/LogoGISemFundo.png')} />
+            </TouchableOpacity>
         </View>
     );
 };
@@ -42,4 +45,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default header;
+export default Header;
