@@ -8,15 +8,15 @@ const TelaLogin = ({ navigation }) => {
     const [senha, setSenha] = useState('');
 
     const handleLogin = () => {
-            signInWithEmailAndPassword(auth, email, senha)
-        .then(userCredential => {
-            const user = userCredential.user;
-            //Alert.alert('Login realizado com sucesso!', `Bem-vindo, ${user.email}`);
-            navigation.navigate("TelaInicial");
-        })
-        .catch(error => {
-            Alert.alert('Erro ao fazer login', error.message);
-        });
+        signInWithEmailAndPassword(auth, email, senha)
+            .then(userCredential => {
+                const user = userCredential.user;
+                //Alert.alert('Login realizado com sucesso!', `Bem-vindo, ${user.email}`);
+                navigation.navigate("TelaInicial");
+            })
+            .catch(error => {
+                Alert.alert('Erro ao fazer login', error.message);
+            });
     };
 
     return (
@@ -40,7 +40,11 @@ const TelaLogin = ({ navigation }) => {
                 <TouchableOpacity style={styles.buttonForm} onPress={handleLogin}>
                     <Text style={styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>
-                <Text style={{ alignSelf: 'center', marginTop: 15 }}>Esqueci minha senha</Text>
+                <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenha")}>
+                    <Text style={styles.textFormPassword}>
+                        Esqueci minha senha
+                    </Text>
+                </TouchableOpacity>
                 <Text style={{ alignSelf: 'center', marginTop: 15 }}>Centro Educacional Gente Inocente 2025 ©</Text>
             </View>
         </View>
@@ -91,7 +95,21 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 20,
         fontWeight: 'bold',
-    }
+    },
+    forgottMyPasswordLink:{
+
+    },
+    textForm:{
+        alignSelf: 'center', 
+        marginTop: 15, 
+        textDecorationLine: 'underline'
+    },
+    textFormPassword:{
+        alignSelf: 'center', 
+        marginTop: 15, 
+        textDecorationLine: 'underline',
+        fontSize: 18,
+    },
 });
 
 export default TelaLogin;

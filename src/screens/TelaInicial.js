@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert, SafeAreaView, StatusBar } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const TelaInicial = ({ navigation }) => {
     const confirmarVoltar = () => {
@@ -19,7 +20,7 @@ const TelaInicial = ({ navigation }) => {
         );
     };
     return (
-        <View style={styles.mainContainer}>
+        <SafeAreaView style={styles.mainContainer}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Seja bem-vindo!</Text>
                 <Image style={styles.headerImg} source={require('../../assets/LogoGISemFundo.png')} />
@@ -55,7 +56,7 @@ const TelaInicial = ({ navigation }) => {
                     </View>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFFf',
         alignContent: 'center',
         flexDirection: 'column',
+        //marginTop: StatusBar.currentHeight
     },
     header: {
         backgroundColor: '#FCC911',
