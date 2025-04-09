@@ -7,6 +7,7 @@ import Ocorrencias from './src/screens/Ocorrencias';
 import Aluno from './src/screens/Aluno';
 import Calendario from './src/screens/Calendario';
 import DadosDoAluno from './src/screens/DadosDoAluno';
+import EsqueciMinhaSenha from './src/screens/EsqueciMinhaSenha';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -57,6 +58,11 @@ const App = () => {
         <Stack.Screen
           name="Calendario"
           component={Calendario}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EsqueciMinhaSenha"
+          component={EsqueciMinhaSenha}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
