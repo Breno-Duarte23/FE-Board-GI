@@ -78,10 +78,8 @@ const EsqueciMinhaSenha = ({ navigation }) => {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#FFFFFFf',
+        backgroundColor: '#FFFFFF',
         justifyContent: 'center',
-        alignContent: 'center',
-        flexDirection: 'column',
     },
     backArrow: {
         width: 25,
@@ -98,7 +96,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginVertical: 40,
         justifyContent: 'center',
-        alignContent: 'center',
         borderRadius: 5,
         padding: 5,
     },
