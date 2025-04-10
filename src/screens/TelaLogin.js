@@ -26,8 +26,7 @@ const TelaLogin = ({ navigation }) => {
         }
 
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, emailTrimmed, senhaTrimmed);
-            const user = userCredential.user;
+            await signInWithEmailAndPassword(auth, emailTrimmed, senhaTrimmed);
             navigation.navigate("TelaInicial");
         } catch (error) {
             Alert.alert('Erro ao fazer login', error.message);
@@ -40,6 +39,7 @@ const TelaLogin = ({ navigation }) => {
                 style={styles.imgLogin}
                 source={require('../../assets/LogoGISemFundo.png')}
             />
+
             <View style={styles.formLogin}>
                 <TextInput
                     style={styles.inputForm}
@@ -95,10 +95,8 @@ const TelaLogin = ({ navigation }) => {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#FFFFFFf',
+        backgroundColor: '#FFFFFF',
         justifyContent: 'center',
-        alignContent: 'center',
-        flexDirection: 'column',
     },
     imgLogin: {
         width: 300,
@@ -109,7 +107,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginVertical: 40,
         justifyContent: 'center',
-        alignContent: 'center',
         borderRadius: 5,
         padding: 5,
     },
@@ -134,7 +131,7 @@ const styles = StyleSheet.create({
     toggleIcon: {
         width: 24,
         height: 24,
-        tintColor: '#888', 
+        tintColor: '#888',
     },
     buttonForm: {
         backgroundColor: '#FCC911',

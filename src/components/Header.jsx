@@ -4,12 +4,24 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 const Header = ({ title, onBackPress, navigation }) => {
     return (
         <View style={styles.header}>
-            <TouchableOpacity onPress={onBackPress}>
-                <Image style={styles.backArrow} source={require('../../assets/seta-esquerda.png')} />
+            <TouchableOpacity
+                onPress={onBackPress}
+                style={styles.backButton}
+                hitSlop={{ top: 60, bottom: 60, left: 60, right: 60 }}
+            >
+                <Image
+                    style={styles.backArrow}
+                    source={require('../../assets/seta-esquerda.png')}
+                />
             </TouchableOpacity>
+
             <Text style={styles.headerText} numberOfLines={1}>{title}</Text>
+
             <TouchableOpacity onPress={() => navigation?.navigate('TelaInicial')}>
-                <Image style={styles.headerImg} source={require('../../assets/LogoGISemFundo.png')} />
+                <Image
+                    style={styles.headerImg}
+                    source={require('../../assets/LogoGISemFundo.png')}
+                />
             </TouchableOpacity>
         </View>
     );
@@ -44,7 +56,13 @@ const styles = StyleSheet.create({
         width: 25,
         height: 25,
         resizeMode: 'contain',
-        marginTop: 20,
+    },
+    backButton: {
+        width: 25,
+        height: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 25,
     },
 });
 
