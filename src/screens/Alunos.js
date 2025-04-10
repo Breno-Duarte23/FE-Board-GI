@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
-
-const Aluno = ({ navigation }) => {
+import Header from '../components/Header';
+const Alunos = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.navigate('TelaInicial')}>
-                    <Image style={styles.backArrow} source={require('../../assets/seta-esquerda.png')} />
-                </TouchableOpacity>
-                <Text style={styles.headerText}>Alunos</Text>
-                <Image style={styles.headerImg} source={require('../../assets/LogoGISemFundo.png')} />
+            <View>
+                <Header title="Alunos" onBackPress={() => navigation.navigate('TelaInicial')} />
             </View>
             <View style={styles.body}>
                 <View style={styles.btnsContainer}>
@@ -105,4 +101,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Aluno;
+export default Alunos;

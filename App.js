@@ -4,15 +4,12 @@ import TelaInicial from './src/screens/TelaInicial';
 import Recados from './src/screens/Recados';
 import Comunicados from './src/screens/Comunicados';
 import Ocorrencias from './src/screens/Ocorrencias';
-import Aluno from './src/screens/Aluno';
+import Alunos from './src/screens/Alunos';
 import Calendario from './src/screens/Calendario';
 import DadosDoAluno from './src/screens/DadosDoAluno';
 import EsqueciMinhaSenha from './src/screens/EsqueciMinhaSenha';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
-
-
 
 const App = () => {
 
@@ -47,7 +44,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Aluno"
-          component={Aluno}
+          component={Alunos}
           options={{ headerShown: false }}
         />
         <Stack.Screen

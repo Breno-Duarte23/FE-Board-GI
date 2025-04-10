@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
-
+import Header from '../components/Header';
 const Calendario = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={()=> navigation.navigate('TelaInicial')}>
-                    <Image style={styles.backArrow} source={require('../../assets/seta-esquerda.png')} />
-                </TouchableOpacity>
-                <Text style={styles.headerText}>Calendario</Text>
-                <Image style={styles.headerImg} source={require('../../assets/LogoGISemFundo.png')} />
+            <View>
+                <Header title="Calendario" onBackPress={() => navigation.navigate('TelaInicial')} />
+                <Text style={styles.text}>Calendario</Text>
             </View>
             <Text style={styles.text}>Calendario</Text>
         </View>
