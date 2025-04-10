@@ -6,7 +6,7 @@ const Recados = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
             <View>
-                <Header title="Recados" onBackPress={() => navigation.navigate('TelaInicial')} />
+                <Header title="Recados" onBackPress={() => navigation.navigate('TelaInicial')} navigation={navigation} />
                 <Text style={styles.text}>Recados</Text>
             </View>
         </View>

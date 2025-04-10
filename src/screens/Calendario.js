@@ -5,7 +5,7 @@ const Calendario = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
             <View>
-                <Header title="Calendario" onBackPress={() => navigation.navigate('TelaInicial')} />
+                <Header title="Calendario" onBackPress={() => navigation.navigate('TelaInicial')} navigation={navigation} />
                 <Text style={styles.text}>Calendario</Text>
             </View>
             <Text style={styles.text}>Calendario</Text>

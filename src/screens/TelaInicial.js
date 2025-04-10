@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert, SafeAreaView, StatusBar } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 const TelaInicial = ({ navigation }) => {
     const confirmarVoltar = () => {
@@ -31,25 +30,25 @@ const TelaInicial = ({ navigation }) => {
                 </TouchableOpacity>
                 <View style={styles.btnsContainer}>
                     <View>
-                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Recados')}>
+                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={() => navigation.navigate('Recados')}>
                             <Image style={styles.imgMainButton} source={require('../../assets/book.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Recados</Text>
                     </View>
                     <View>
-                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Comunicados')}>
+                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={() => navigation.navigate('Comunicados')}>
                             <Image style={styles.imgMainButton} source={require('../../assets/comunicados.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Comunicados</Text>
                     </View>
                     <View >
-                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Aluno')}>
+                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={() => navigation.navigate('Aluno')}>
                             <Image style={styles.imgMainButton} source={require('../../assets/aluno.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Alunos</Text>
                     </View>
                     <View >
-                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={()=> navigation.navigate('Calendario')}>
+                        <TouchableOpacity style={styles.mainBtnTouchable} onPress={() => navigation.navigate('Calendario')}>
                             <Image style={styles.imgMainButton} source={require('../../assets/calendario.png')} />
                         </TouchableOpacity>
                         <Text style={styles.labelBtn} numberOfLines={1}>Calendário</Text>
@@ -80,7 +79,8 @@ const styles = StyleSheet.create({
         color: "#49688d",
         fontSize: 25,
         fontWeight: 'bold',
-        marginTop: 20
+        marginTop: 20,
+        selfAlign: 'center'
     },
     headerImg: {
         width: 100,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         alignContent: 'flex-start',
         justifyContent: 'space-between',
     },
-    
+
     mainBtnTouchable: {
         width: 115,
         height: 115,

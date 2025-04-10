@@ -5,7 +5,7 @@ const DadosDoAluno = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
             <View>
-                <Header title="Dados do Aluno" onBackPress={() => navigation.navigate('Alunos')} />
+                <Header title="Dados do Aluno" onBackPress={() => navigation.navigate('Alunos')} navigation={navigation} />
                 <Text style={styles.text}>Dados do Aluno</Text>
             </View>
         </View>

@@ -6,7 +6,7 @@ const Ocorrencias = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
             <View>
-                <Header title="Ocorrências" onBackPress={() => navigation.navigate('TelaInicial')} />
+                <Header title="Ocorrências" onBackPress={() => navigation.navigate('TelaInicial')} navigation={navigation} />
                 <Text style={styles.text}>Ocorrencias</Text>
             </View>
         </View>
