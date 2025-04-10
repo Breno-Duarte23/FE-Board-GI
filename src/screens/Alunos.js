@@ -5,7 +5,7 @@ const Alunos = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
             <View>
-                <Header title="Alunos" onBackPress={() => navigation.navigate('TelaInicial')} />
+                <Header title="Alunos" onBackPress={() => navigation.navigate('TelaInicial')} navigation={navigation} />
             </View>
             <View style={styles.body}>
                 <View style={styles.btnsContainer}>

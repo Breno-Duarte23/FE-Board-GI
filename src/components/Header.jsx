@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import TelaInicial from './../screens/TelaInicial';
 
 const Header = ({ title, onBackPress, navigation }) => {
     return (
@@ -8,8 +7,8 @@ const Header = ({ title, onBackPress, navigation }) => {
             <TouchableOpacity onPress={onBackPress}>
                 <Image style={styles.backArrow} source={require('../../assets/seta-esquerda.png')} />
             </TouchableOpacity>
-            <Text style={styles.headerText}>{title}</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('TelaInicial')}>
+            <Text style={styles.headerText} numberOfLines={1}>{title}</Text>
+            <TouchableOpacity onPress={() => navigation?.navigate('TelaInicial')}>
                 <Image style={styles.headerImg} source={require('../../assets/LogoGISemFundo.png')} />
             </TouchableOpacity>
         </View>
@@ -26,10 +25,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     headerText: {
+        position: 'absolute',
+        top: 60,
+        left: 0,
+        right: 0,
+        textAlign: 'center',
         color: "#49688d",
-        fontSize: 23,
+        fontSize: 20,
         fontWeight: 'bold',
-        marginTop: 20,
     },
     headerImg: {
         width: 100,
