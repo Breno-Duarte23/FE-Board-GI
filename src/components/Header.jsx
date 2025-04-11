@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
     headerText: {
         position: 'absolute',
         top: 60,
-        left: 0,
+        left: -10,
         right: 0,
         textAlign: 'center',
         color: "#49688d",
-        fontSize: 20,
+        fontSize: 19,
         fontWeight: 'bold',
     },
     headerImg: {
