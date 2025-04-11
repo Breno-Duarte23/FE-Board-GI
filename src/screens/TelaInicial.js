@@ -24,8 +24,9 @@ const TelaInicial = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.mainContainer}>
+            
             <Header title="Sejam Bem Vindos!" onBackPress={confirmarVoltar} />
-
+            
             <View style={styles.body}>
                 <View style={styles.btnsContainer}>
                     <MenuButton
