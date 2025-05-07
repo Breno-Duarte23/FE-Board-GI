@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// Telas
-import TelaInicial from '../screens/TelaInicial';
-import PerfilScreen from '../screens/PerfilScreen';
-// import MensagensScreen from './MensagensScreen';
+// Exemplos de telas
+import HomeScreen from './screens/HomeScreen';
+import MessagesScreen from './screens/MessagesScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,15 +16,16 @@ const BottomTabs = () => {
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     headerShown: false,
-                    tabBarActiveTintColor: '#3b3e90',
+                    tabBarActiveTintColor: '#007bff',
                     tabBarInactiveTintColor: 'gray',
                     tabBarStyle: {
                         backgroundColor: '#fff',
-                        borderTopWidth: 0.3,
                         height: 60,
+                        borderTopWidth: 0.5,
+                        borderTopColor: '#ccc',
                     },
                     tabBarIcon: ({ color, size }) => {
-                        let iconName = 'home';
+                        let iconName = '';
 
                         switch (route.name) {
                             case 'Início':
@@ -42,9 +43,9 @@ const BottomTabs = () => {
                     },
                 })}
             >
-                <Tab.Screen name="Início" component={TelaInicial} />
-                <Tab.Screen name="Mensagens" component={MensagensScreen} />
-                <Tab.Screen name="Perfil" component={PerfilScreen} />
+                <Tab.Screen name="Início" component={HomeScreen} />
+                <Tab.Screen name="Mensagens" component={MessagesScreen} />
+                <Tab.Screen name="Perfil" component={ProfileScreen} />
             </Tab.Navigator>
         </NavigationContainer>
     );
