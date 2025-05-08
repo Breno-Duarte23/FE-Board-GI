@@ -1,53 +1,69 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-// Telas
-import TelaInicial from '../screens/TelaInicial';
-import PerfilScreen from '../screens/PerfilScreen';
-// import MensagensScreen from './MensagensScreen';
-
-const Tab = createBottomTabNavigator();
-
-const BottomTabs = () => {
+const Header = ({ title, onBackPress, navigation }) => {
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={({ route }) => ({
-                    headerShown: false,
-                    tabBarActiveTintColor: '#3b3e90',
-                    tabBarInactiveTintColor: 'gray',
-                    tabBarStyle: {
-                        backgroundColor: '#fff',
-                        borderTopWidth: 0.3,
-                        height: 60,
-                    },
-                    tabBarIcon: ({ color, size }) => {
-                        let iconName = 'home';
-
-                        switch (route.name) {
-                            case 'Início':
-                                iconName = 'home';
-                                break;
-                            case 'Mensagens':
-                                iconName = 'chat';
-                                break;
-                            case 'Perfil':
-                                iconName = 'person';
-                                break;
-                        }
-
-                        return <Icon name={iconName} size={size} color={color} />;
-                    },
-                })}
+        <View style={styles.header}>
+            <TouchableOpacity
+                onPress={onBackPress}
+                style={styles.backButton}
+                hitSlop={{ top: 60, bottom: 60, left: 60, right: 60 }}
             >
-                <Tab.Screen name="Início" component={TelaInicial} />
-                <Tab.Screen name="Mensagens" component={MensagensScreen} />
-                <Tab.Screen name="Perfil" component={PerfilScreen} />
-            </Tab.Navigator>
-        </NavigationContainer>
+                <Image
+                    style={styles.backArrow}
+                    source={require('../../assets/seta-esquerda.png')}
+                />
+            </TouchableOpacity>
+
+            <Text style={styles.headerText} numberOfLines={1}>{title}</Text>
+
+            <TouchableOpacity onPress={() => navigation?.navigate('TelaInicial')}>
+                <Image
+                    style={styles.headerImg}
+                    source={require('../../assets/LogoGISemFundo.png')}
+                />
+            </TouchableOpacity>
+        </View>
     );
 };
 
-export default BottomTabs;
+const styles = StyleSheet.create({
+    header: {
+        backgroundColor: '#FCC911',
+        height: 115,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+    },
+    headerText: {
+        position: 'absolute',
+        top: 60,
+        left: 0,
+        right: 0,
+        textAlign: 'center',
+        color: "#49688d",
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    headerImg: {
+        width: 100,
+        height: 100,
+        resizeMode: 'contain',
+        marginTop: 20,
+    },
+    backArrow: {
+        width: 25,
+        height: 25,
+        resizeMode: 'contain',
+    },
+    backButton: {
+        width: 25,
+        height: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 25,
+    },
+});
+
+export default Header;
