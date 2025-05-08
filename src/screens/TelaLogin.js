@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     Text,
@@ -9,27 +9,41 @@ import {
     Alert
 } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { initFirebaseAuth } from '../../firebaseConfig';
 
 const TelaLogin = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [senhaVisivel, setSenhaVisivel] = useState(false);
+    const [authInstance, setAuthInstance] = useState(null);
+
+    useEffect(() => {
+        const auth = initFirebaseAuth(); // inicializa o auth de forma segura
+        setAuthInstance(auth);
+        console.log("Auth chegou à tela de login:", auth);
+    }, []); // o useEffect roda apenas uma vez quando o componente é montado
 
     const handleLogin = async () => {
         const emailTrimmed = email.trim();
         const senhaTrimmed = senha.trim();
+        console.log("HandleLogin foi chamado");
 
         if (!emailTrimmed || !senhaTrimmed) {
             Alert.alert('Erro', 'Por favor, preencha todos os campos.');
             return;
         }
 
+        if (!authInstance) {
+            Alert.alert('Erro', 'Sistema de autenticação ainda não foi carregado.');
+            return;
+        }
+
         try {
-            await signInWithEmailAndPassword(auth, emailTrimmed, senhaTrimmed);
+            await signInWithEmailAndPassword(authInstance, emailTrimmed, senhaTrimmed);
+            console.log('Login bem-sucedido');
             navigation.navigate("Home");
         } catch (error) {
-            Alert.alert('Erro ao fazer login, e-mail ou senha incorreto/a.', error.message);
+            Alert.alert('Erro ao fazer login', error.message);
         }
     };
 
@@ -76,6 +90,7 @@ const TelaLogin = ({ navigation }) => {
                 <TouchableOpacity
                     style={styles.buttonForm}
                     onPress={handleLogin}
+                    disabled={!authInstance}
                 >
                     <Text style={styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>
