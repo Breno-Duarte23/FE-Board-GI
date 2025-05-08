@@ -27,9 +27,9 @@ const TelaLogin = ({ navigation }) => {
 
         try {
             await signInWithEmailAndPassword(auth, emailTrimmed, senhaTrimmed);
-            navigation.navigate("TelaInicial");
+            navigation.navigate("Home");
         } catch (error) {
-            Alert.alert('Erro ao fazer login', error.message);
+            Alert.alert('Erro ao fazer login, e-mail ou senha incorreto/a.', error.message);
         }
     };
 
