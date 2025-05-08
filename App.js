@@ -7,7 +7,7 @@ import Alunos from './src/screens/Alunos';
 import Calendario from './src/screens/Calendario';
 import DadosDoAluno from './src/screens/DadosDoAluno';
 import EsqueciMinhaSenha from './src/screens/EsqueciMinhaSenha';
-import BottomTabs from './src/screens/BottomTabs';
+import BottomTabs from './src/components/BottomTabs';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";

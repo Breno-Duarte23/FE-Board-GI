@@ -3,10 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// Exemplos de telas
-import HomeScreen from './screens/HomeScreen';
-import MessagesScreen from './screens/MessagesScreen';
-import ProfileScreen from './screens/ProfileScreen';
+// Importando as telas reais
+import TelaInicial from '../screens/TelaInicial';
+import PerfilScreen from '../screens/PerfilScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,21 +30,19 @@ const BottomTabs = () => {
                             case 'Início':
                                 iconName = 'home';
                                 break;
-                            case 'Mensagens':
-                                iconName = 'chat';
-                                break;
                             case 'Perfil':
                                 iconName = 'person';
                                 break;
+                            default:
+                                iconName = 'circle';
                         }
 
                         return <Icon name={iconName} size={size} color={color} />;
                     },
                 })}
             >
-                <Tab.Screen name="Início" component={HomeScreen} />
-                <Tab.Screen name="Mensagens" component={MessagesScreen} />
-                <Tab.Screen name="Perfil" component={ProfileScreen} />
+                <Tab.Screen name="Início" component={TelaInicial} />
+                <Tab.Screen name="Perfil" component={PerfilScreen} />
             </Tab.Navigator>
         </NavigationContainer>
     );

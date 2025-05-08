@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Image, Button, StyleSheet, Alert } from 'react-native';
-import md5 from 'md5';  // Biblioteca para gerar o hash MD5 do e-mail.
+import SHA256 from 'crypto-js/sha256';
 
 const PerfilScreen = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [foto, setFoto] = useState('');
 
-  // Função para gerar o URL do Gravatar
+  // Gera o hash SHA-256 do e-mail
   const gerarFotoGravatar = (email) => {
-    const emailHash = md5(email.trim().toLowerCase()); // Garante que o email seja minúsculo e sem espaços
-    return `https://www.gravatar.com/avatar/${emailHash}?d=identicon`; // URL padrão do Gravatar
+    const emailHash = SHA256(email.trim().toLowerCase()).toString();
+    return `https://www.gravatar.com/avatar/${emailHash}?d=identicon`;
   };
 
   useEffect(() => {
-    // Caso já tenha um e-mail, geramos a foto automaticamente ao carregar a tela.
     if (email) {
       const fotoUrl = gerarFotoGravatar(email);
       setFoto(fotoUrl);
     }
-  }, [email]);  // Atualiza sempre que o e-mail mudar
+  }, [email]);
 
   const handleSaveProfile = () => {
     Alert.alert('Perfil salvo', `Nome: ${nome}\nE-mail: ${email}`);
@@ -29,7 +28,6 @@ const PerfilScreen = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Perfil do Usuário</Text>
 
-      {/* Exibindo a foto do usuário */}
       <Image source={{ uri: foto }} style={styles.fotoPerfil} />
 
       <TextInput
@@ -48,7 +46,6 @@ const PerfilScreen = () => {
       />
 
       <Button title="Salvar" onPress={handleSaveProfile} />
-
     </View>
   );
 };
