@@ -3,10 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// Telas
+// Importando as telas reais
 import TelaInicial from '../screens/TelaInicial';
 import PerfilScreen from '../screens/PerfilScreen';
-// import MensagensScreen from './MensagensScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,26 +15,26 @@ const BottomTabs = () => {
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     headerShown: false,
-                    tabBarActiveTintColor: '#3b3e90',
+                    tabBarActiveTintColor: '#007bff',
                     tabBarInactiveTintColor: 'gray',
                     tabBarStyle: {
                         backgroundColor: '#fff',
-                        borderTopWidth: 0.3,
                         height: 60,
+                        borderTopWidth: 0.5,
+                        borderTopColor: '#ccc',
                     },
                     tabBarIcon: ({ color, size }) => {
-                        let iconName = 'home';
+                        let iconName = '';
 
                         switch (route.name) {
                             case 'Início':
                                 iconName = 'home';
                                 break;
-                            case 'Mensagens':
-                                iconName = 'chat';
-                                break;
                             case 'Perfil':
                                 iconName = 'person';
                                 break;
+                            default:
+                                iconName = 'circle';
                         }
 
                         return <Icon name={iconName} size={size} color={color} />;
@@ -43,7 +42,6 @@ const BottomTabs = () => {
                 })}
             >
                 <Tab.Screen name="Início" component={TelaInicial} />
-                <Tab.Screen name="Mensagens" component={MensagensScreen} />
                 <Tab.Screen name="Perfil" component={PerfilScreen} />
             </Tab.Navigator>
         </NavigationContainer>
