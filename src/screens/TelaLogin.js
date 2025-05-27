@@ -8,18 +8,18 @@ import {
     TouchableOpacity,
     Alert
 } from 'react-native';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth/react-native';
+import { initFirebaseAuth } from '../../firebaseConfig';
 
 const TelaLogin = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [senhaVisivel, setSenhaVisivel] = useState(false);
+    const auth = initFirebaseAuth();
 
     const handleLogin = async () => {
         const emailTrimmed = email.trim();
         const senhaTrimmed = senha.trim();
-
         if (!emailTrimmed || !senhaTrimmed) {
             Alert.alert('Erro', 'Por favor, preencha todos os campos.');
             return;
@@ -27,7 +27,7 @@ const TelaLogin = ({ navigation }) => {
 
         try {
             await signInWithEmailAndPassword(auth, emailTrimmed, senhaTrimmed);
-            navigation.navigate("TelaInicial");
+            navigation.navigate("Home");
         } catch (error) {
             Alert.alert('Erro ao fazer login, e-mail ou senha incorreto/a.', error.message);
         }
