@@ -38,6 +38,11 @@ const TelaLogin = ({ navigation }) => {
             return;
         }
 
+        if (!authInstance) {
+            Alert.alert('Erro', 'Sistema de autenticação ainda não foi carregado.');
+            return;
+        }
+
         try {
             await signInWithEmailAndPassword(auth, emailTrimmed, senhaTrimmed);
 
@@ -118,6 +123,7 @@ const TelaLogin = ({ navigation }) => {
                 <TouchableOpacity
                     style={styles.buttonForm}
                     onPress={handleLogin}
+                    disabled={!authInstance}
                 >
                     <Text style={styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>

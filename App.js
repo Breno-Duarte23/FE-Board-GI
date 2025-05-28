@@ -12,6 +12,7 @@ import { AuthProvider } from './AuthContext';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import TelaInicial from './src/screens/TelaInicial';
 
 const App = () => {
   const Stack = createStackNavigator();
