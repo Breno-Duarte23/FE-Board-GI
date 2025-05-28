@@ -9,7 +9,7 @@ const PerfilScreen = () => {
 
   const gerarFotoGravatar = (email) => {
     const emailHash = SHA256(email.trim().toLowerCase()).toString();
-    return `https://www.gravatar.com/avatar/${emailHash}?d=identicon`;
+    return `https://www.gravatar.com/avatar/${emailHash}?d=identicon&s=400`;
   };
 
   useEffect(() => {
