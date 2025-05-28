@@ -8,6 +8,7 @@ import Calendario from './src/screens/Calendario';
 import DadosDoAluno from './src/screens/DadosDoAluno';
 import EsqueciMinhaSenha from './src/screens/EsqueciMinhaSenha';
 import BottomTabs from './src/components/BottomTabs';
+import { AuthProvider } from './AuthContext';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -16,7 +17,8 @@ const App = () => {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
+    <AuthProvider>
+<NavigationContainer>
       <Stack.Navigator initialRouteName="TelaLogin">
         <Stack.Screen
           name="TelaLogin"
@@ -25,7 +27,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Home"
-          component={BottomTabs} // ← substitui TelaInicial
+          component={BottomTabs} 
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -65,6 +67,7 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </AuthProvider>
   );
 };
 
