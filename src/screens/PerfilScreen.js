@@ -4,34 +4,34 @@ import SHA256 from 'crypto-js/sha256';
 import { useAuth } from '../../AuthContext';
 
 const PerfilScreen = () => {
-    const [foto, setFoto] = useState('');
-    const { email } = useAuth();
+  const { userEmail } = useAuth();
+  const [foto, setFoto] = useState('');
 
-    const gerarFotoGravatar = (email) => {
-        const emailHash = SHA256(email.trim().toLowerCase()).toString();
-        return `https://www.gravatar.com/avatar/${emailHash}?d=identicon`;
-    };
+  const gerarFotoGravatar = (email) => {
+    const emailHash = SHA256(email.trim().toLowerCase()).toString();
+    return `https://www.gravatar.com/avatar/${emailHash}?d=identicon`;
+  };
 
-    useEffect(() => {
-        if (email) {
-            const fotoUrl = gerarFotoGravatar(email);
-            setFoto(fotoUrl);
-        } else {
-            setFoto('../../assets/avatar-default.png'); 
-        }
-    }, [email]);
+  useEffect(() => {
+    if (userEmail) {
+      const fotoUrl = gerarFotoGravatar(userEmail);
+      setFoto(fotoUrl);
+    } else {
+      setFoto('../../assets/avatar-default.png');
+    }
+  }, [userEmail]);
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Perfil do Usuário</Text>
-            <Image
-                source={{ uri: foto }}
-                style={styles.fotoPerfil}
-                defaultSource={require('../../assets/avatar-default.png')}
-            />
-            <Text style={styles.userEmail}>Email do usuário: {email}</Text>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Perfil do Usuário</Text>
+      <Image
+        source={{ uri: foto }}
+        style={styles.fotoPerfil}
+        defaultSource={require('../../assets/avatar-default.png')}
+      />
+      <Text style={styles.emailText}>{userEmail}</Text>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
