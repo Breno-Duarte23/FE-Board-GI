@@ -8,12 +8,12 @@ import {
     TouchableOpacity,
     Alert
 } from 'react-native';
-import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { sendPasswordResetEmail } from 'firebase/auth/react-native';
+import { initFirebaseAuth } from '../../firebaseConfig';
 
 const EsqueciMinhaSenha = ({ navigation }) => {
     const [email, setEmail] = useState('');
-
+    const auth = initFirebaseAuth();
     const handlePasswordReset = async () => {
         if (!email.trim()) {
             Alert.alert('Erro', 'Por favor, insira um e-mail válido.');

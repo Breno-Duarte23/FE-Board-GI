@@ -1,33 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput,
-    TouchableOpacity,
-    Alert
-} from 'react-native';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth/react-native';
 import { initFirebaseAuth } from '../../firebaseConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from '../../AuthContext';
 
 const TelaLogin = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [senhaVisivel, setSenhaVisivel] = useState(false);
-    const [authInstance, setAuthInstance] = useState(null);
+    const [lembrar, setLembrar] = useState(false);
+    const auth = initFirebaseAuth();
+    const { login } = useAuth();
 
     useEffect(() => {
-        const auth = initFirebaseAuth(); // inicializa o auth de forma segura
-        setAuthInstance(auth);
-        console.log("Auth chegou à tela de login:", auth);
-    }, []); // o useEffect roda apenas uma vez quando o componente é montado
+        const carregarCredenciais = async () => {
+            try {
+                const savedEmail = await AsyncStorage.getItem('email');
+                const savedSenha = await AsyncStorage.getItem('senha');
+                if (savedEmail && savedSenha) {
+                    setEmail(savedEmail);
+                    setSenha(savedSenha);
+                    setLembrar(true);
+                }
+            } catch (error) {
+                console.log('Erro ao carregar credenciais:', error);
+            }
+        };
+        carregarCredenciais();
+    }, []);
 
     const handleLogin = async () => {
         const emailTrimmed = email.trim();
         const senhaTrimmed = senha.trim();
-        console.log("HandleLogin foi chamado");
-
         if (!emailTrimmed || !senhaTrimmed) {
             Alert.alert('Erro', 'Por favor, preencha todos os campos.');
             return;
@@ -39,11 +44,29 @@ const TelaLogin = ({ navigation }) => {
         }
 
         try {
-            await signInWithEmailAndPassword(authInstance, emailTrimmed, senhaTrimmed);
-            console.log('Login bem-sucedido');
-            navigation.navigate("Home");
+            await signInWithEmailAndPassword(auth, emailTrimmed, senhaTrimmed);
+
+            if (lembrar) {
+                await AsyncStorage.setItem('email', emailTrimmed);
+                await AsyncStorage.setItem('senha', senhaTrimmed);
+            } else {
+                await AsyncStorage.removeItem('email');
+                await AsyncStorage.removeItem('senha');
+            }
+
+            login(emailTrimmed);
+
+            navigation.navigate('Home');
         } catch (error) {
-            Alert.alert('Erro ao fazer login', error.message);
+            Alert.alert('Erro ao fazer login', 'E-mail ou senha incorretos.');
+        }
+    };
+
+    const toggleLembrar = async () => {
+        setLembrar(!lembrar);
+        if (lembrar) {
+            await AsyncStorage.removeItem('email');
+            await AsyncStorage.removeItem('senha');
         }
     };
 
@@ -88,6 +111,16 @@ const TelaLogin = ({ navigation }) => {
                 </View>
 
                 <TouchableOpacity
+                    style={styles.checkboxContainer}
+                    onPress={toggleLembrar}
+                >
+                    <View style={styles.checkbox}>
+                        {lembrar && <View style={styles.checkboxChecked} />}
+                    </View>
+                    <Text style={styles.checkboxLabel}>Lembre de mim</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
                     style={styles.buttonForm}
                     onPress={handleLogin}
                     disabled={!authInstance}
@@ -95,7 +128,7 @@ const TelaLogin = ({ navigation }) => {
                     <Text style={styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenha")}>
+                <TouchableOpacity onPress={() => navigation.navigate('EsqueciMinhaSenha')}>
                     <Text style={styles.textFormPassword}>Esqueci minha senha</Text>
                 </TouchableOpacity>
 
@@ -147,6 +180,29 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
         tintColor: '#888',
+    },
+    checkboxContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    checkbox: {
+        width: 18,
+        height: 18,
+        borderWidth: 2,
+        borderColor: '#bfbfbb',
+        marginRight: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    checkboxChecked: {
+        width: 10,
+        height: 10,
+        backgroundColor: '#FCC911',
+    },
+    checkboxLabel: {
+        color: '#888',
+        fontSize: 15,
     },
     buttonForm: {
         backgroundColor: '#FCC911',

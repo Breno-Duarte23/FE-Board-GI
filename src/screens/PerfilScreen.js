@@ -1,82 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Image, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import SHA256 from 'crypto-js/sha256';
+import { useAuth } from '../../AuthContext';
 
 const PerfilScreen = () => {
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
+  const { userEmail } = useAuth();
   const [foto, setFoto] = useState('');
 
-  // Gera o hash SHA-256 do e-mail
   const gerarFotoGravatar = (email) => {
     const emailHash = SHA256(email.trim().toLowerCase()).toString();
     return `https://www.gravatar.com/avatar/${emailHash}?d=identicon`;
   };
 
   useEffect(() => {
-    if (email) {
-      const fotoUrl = gerarFotoGravatar(email);
+    if (userEmail) {
+      const fotoUrl = gerarFotoGravatar(userEmail);
       setFoto(fotoUrl);
+    } else {
+      setFoto('../../assets/avatar-default.png');
     }
-  }, [email]);
-
-  const handleSaveProfile = () => {
-    Alert.alert('Perfil salvo', `Nome: ${nome}\nE-mail: ${email}`);
-  };
+  }, [userEmail]);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Perfil do Usuário</Text>
-
-      <Image source={{ uri: foto }} style={styles.fotoPerfil} />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Nome"
-        value={nome}
-        onChangeText={setNome}
+      <Image
+        source={{ uri: foto }}
+        style={styles.fotoPerfil}
+        defaultSource={require('../../assets/avatar-default.png')}
       />
-
-      <TextInput
-        style={styles.input}
-        placeholder="E-mail"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-      />
-
-      <Button title="Salvar" onPress={handleSaveProfile} />
+      <Text style={styles.emailText}>{userEmail}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    fontWeight: 'bold',
-  },
-  fotoPerfil: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    marginBottom: 20,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    title: {
+        fontSize: 24,
+        marginBottom: 20,
+        fontWeight: 'bold',
+    },
+    fotoPerfil: {
+        width: 220,
+        height: 220,
+        borderRadius: 60,
+        marginBottom: 20,
+        backgroundColor: '#ccc',
+    },
+    userEmail:{
+      fontSize: 18,
+    }
 });
 
 export default PerfilScreen;

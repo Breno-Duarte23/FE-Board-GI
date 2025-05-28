@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import TelaInicial from '../screens/TelaInicial';
@@ -39,10 +38,11 @@ const BottomTabs = () => {
                 },
             })}
         >
-            <Tab.Screen name="Home" component={TelaInicial} />
+            <Tab.Screen name="Início" component={TelaInicial} />
             <Tab.Screen name="Perfil" component={PerfilScreen} />
         </Tab.Navigator>
     );
 };
+
 
 export default BottomTabs;
