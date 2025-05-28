@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput,
-    TouchableOpacity,
-    Alert
-} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth/react-native';
 import { initFirebaseAuth } from '../../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from '../../AuthContext';
 
 const TelaLogin = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -18,6 +11,8 @@ const TelaLogin = ({ navigation }) => {
     const [senhaVisivel, setSenhaVisivel] = useState(false);
     const [lembrar, setLembrar] = useState(false);
     const auth = initFirebaseAuth();
+
+    const { setEmail: setEmailGlobal } = useAuth();
 
     useEffect(() => {
         const carregarCredenciais = async () => {
@@ -55,6 +50,7 @@ const TelaLogin = ({ navigation }) => {
                 await AsyncStorage.removeItem('senha');
             }
 
+            setEmailGlobal(emailTrimmed);
             navigation.navigate("Home");
         } catch (error) {
             Alert.alert('Erro ao fazer login', 'E-mail ou senha incorretos.');
@@ -71,10 +67,7 @@ const TelaLogin = ({ navigation }) => {
 
     return (
         <View style={styles.mainContainer}>
-            <Image
-                style={styles.imgLogin}
-                source={require('../../assets/LogoGISemFundo.png')}
-            />
+            <Image style={styles.imgLogin} source={require('../../assets/LogoGISemFundo.png')} />
 
             <View style={styles.formLogin}>
                 <TextInput
@@ -99,30 +92,20 @@ const TelaLogin = ({ navigation }) => {
                         onPress={() => setSenhaVisivel(!senhaVisivel)}
                     >
                         <Image
-                            source={
-                                senhaVisivel
-                                    ? require('../../assets/olhoFechado.png')
-                                    : require('../../assets/olhoAberto.png')
-                            }
+                            source={senhaVisivel ? require('../../assets/olhoFechado.png') : require('../../assets/olhoAberto.png')}
                             style={styles.toggleIcon}
                         />
                     </TouchableOpacity>
                 </View>
-                {/* Checkbox Lembre de mim */}
-                <TouchableOpacity
-                    style={styles.checkboxContainer}
-                    onPress={toggleLembrar}
-                >
+
+                <TouchableOpacity style={styles.checkboxContainer} onPress={toggleLembrar}>
                     <View style={styles.checkbox}>
                         {lembrar && <View style={styles.checkboxChecked} />}
                     </View>
                     <Text style={styles.checkboxLabel}>Lembre de mim</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                    style={styles.buttonForm}
-                    onPress={handleLogin}
-                >
+                <TouchableOpacity style={styles.buttonForm} onPress={handleLogin}>
                     <Text style={styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>
 
@@ -130,9 +113,7 @@ const TelaLogin = ({ navigation }) => {
                     <Text style={styles.textFormPassword}>Esqueci minha senha</Text>
                 </TouchableOpacity>
 
-                <Text style={styles.footerText}>
-                    Centro Educacional Gente Inocente 2025 ©
-                </Text>
+                <Text style={styles.footerText}>Centro Educacional Gente Inocente 2025 ©</Text>
             </View>
         </View>
     );

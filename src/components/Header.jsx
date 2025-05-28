@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         resizeMode: 'contain',
-        marginTop: 20,
+        marginTop: 20
     },
     backArrow: {
         width: 25,
