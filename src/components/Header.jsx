@@ -17,7 +17,7 @@ const Header = ({ title, onBackPress, navigation }) => {
 
             <Text style={styles.headerText} numberOfLines={1}>{title}</Text>
 
-            <TouchableOpacity onPress={() => navigation?.navigate('TelaInicial')}>
+            <TouchableOpacity onPress={() => navigation?.navigate('Home')}>
                 <Image
                     style={styles.headerImg}
                     source={require('../../assets/LogoGISemFundo.png')}
