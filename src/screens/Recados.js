@@ -5,7 +5,7 @@ import Header from '../components/Header';
 const Recados = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
-            <Header title="Recados" onBackPress={() => navigation.navigate('TelaInicial')} />
+            <Header title="Recados" onBackPress={() => navigation.navigate('Home')} />
             <Text style={styles.text}>Recados</Text>
         </View>
     );
