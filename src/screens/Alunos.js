@@ -5,7 +5,7 @@ import Header from '../components/Header';
 const Alunos = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
-            <Header title="Alunos" onBackPress={() => navigation.navigate('TelaInicial')} navigation={navigation} />
+            <Header title="Alunos" onBackPress={() => navigation.navigate('Home')} navigation={navigation} />
 
             <View style={styles.body}>
                 <View style={styles.btnsContainer}>

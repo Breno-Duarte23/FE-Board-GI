@@ -7,7 +7,7 @@ const Comunicados = ({ navigation }) => {
         <View style={styles.mainContainer}>
             <Header
                 title="Comunicados"
-                onBackPress={() => navigation.navigate('TelaInicial')}
+                onBackPress={() => navigation.navigate('Home')}
                 navigation={navigation}
             />
             <Text style={styles.text}>Comunicados</Text>
