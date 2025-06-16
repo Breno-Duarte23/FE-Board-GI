@@ -33,12 +33,12 @@ const App = () => {
         />
         <Stack.Screen
           name="Recados"
-          component={Recados}
+          component={Recados} //Passar para o Bottom tabs, ele será a página "Inicial"
           options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Comunicados"
-          component={Comunicados}
+          component={Comunicados} // Passar para o Bottom tabs
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -48,7 +48,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Alunos"
-          component={Alunos}
+          component={Alunos} //Passar para o Bottom tabs
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -58,7 +58,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Calendario"
-          component={Calendario}
+          component={Calendario} // Passar para o bottom tabs
           options={{ headerShown: false }}
         />
         <Stack.Screen
