@@ -2,14 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
 
-const Calendario = ({ navigation }) => {
+const Calendario = () => {
     return (
         <View style={styles.mainContainer}>
-            <Header
-                title="Calendário"
-                onBackPress={() => navigation.navigate('Home')}
-                navigation={navigation}
-            />
+            <Header title="Calendário" />
             <Text style={styles.text}>Calendário</Text>
         </View>
     );

@@ -9,65 +9,70 @@ import DadosDoAluno from './src/screens/DadosDoAluno';
 import EsqueciMinhaSenha from './src/screens/EsqueciMinhaSenha';
 import BottomTabs from './src/components/BottomTabs';
 import { AuthProvider } from './AuthContext';
+import RecadoDetalhe from './src/screens/RecadoDetalhe';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import TelaInicial from './src/screens/TelaInicial';
 
 const App = () => {
   const Stack = createStackNavigator();
 
   return (
     <AuthProvider>
-<NavigationContainer>
-      <Stack.Navigator initialRouteName="TelaLogin">
-        <Stack.Screen
-          name="TelaLogin"
-          component={TelaLogin}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={BottomTabs} 
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Recados"
-          component={Recados} //Passar para o Bottom tabs, ele será a página "Inicial"
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Comunicados"
-          component={Comunicados} // Passar para o Bottom tabs
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Ocorrencias"
-          component={Ocorrencias}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Alunos"
-          component={Alunos} //Passar para o Bottom tabs
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="DadosDoAluno"
-          component={DadosDoAluno}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Calendario"
-          component={Calendario} // Passar para o bottom tabs
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="EsqueciMinhaSenha"
-          component={EsqueciMinhaSenha}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="TelaLogin">
+          <Stack.Screen
+            name="TelaLogin"
+            component={TelaLogin}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={BottomTabs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Recados"
+            component={Recados}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Comunicados"
+            component={Comunicados}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Ocorrencias"
+            component={Ocorrencias}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Alunos"
+            component={Alunos}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="DadosDoAluno"
+            component={DadosDoAluno}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Calendario"
+            component={Calendario}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="EsqueciMinhaSenha"
+            component={EsqueciMinhaSenha}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="RecadoDetalhe"
+            component={RecadoDetalhe}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </AuthProvider>
   );
 };
