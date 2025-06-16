@@ -30,24 +30,9 @@ const TelaInicial = ({ navigation }) => {
             <View style={styles.body}>
                 <View style={styles.btnsContainer}>
                     <MenuButton
-                        label="Recados"
-                        imageSource={require('../../assets/book.png')}
-                        onPress={() => navigation.navigate('Recados')}
-                    />
-                    <MenuButton
-                        label="Comunicados"
-                        imageSource={require('../../assets/comunicados.png')}
-                        onPress={() => navigation.navigate('Comunicados')}
-                    />
-                    <MenuButton
                         label="Alunos"
                         imageSource={require('../../assets/aluno.png')}
                         onPress={() => navigation.navigate('Alunos')}
-                    />
-                    <MenuButton
-                        label="Calendário"
-                        imageSource={require('../../assets/calendario.png')}
-                        onPress={() => navigation.navigate('Calendario')}
                     />
                 </View>
             </View>

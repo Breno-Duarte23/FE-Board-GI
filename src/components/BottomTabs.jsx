@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import TelaInicial from '../screens/TelaInicial';
 import PerfilScreen from '../screens/PerfilScreen';
+import Comunicados from '../screens/Comunicados';
+import Calendario from '../screens/Calendario';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,9 +16,10 @@ const BottomTabs = () => {
                 headerShown: false,
                 tabBarActiveTintColor: '#007bff',
                 tabBarInactiveTintColor: 'gray',
+                tabBarShowLabel: false,
                 tabBarStyle: {
                     backgroundColor: '#fff',
-                    height: 60,
+                    height: 65,
                     borderTopWidth: 0.5,
                     borderTopColor: '#ccc',
                 },
@@ -26,6 +29,12 @@ const BottomTabs = () => {
                     switch (route.name) {
                         case 'Início':
                             iconName = 'home';
+                            break;
+                        case 'Comunicados':
+                            iconName = 'message';
+                            break;
+                        case 'Calendário':
+                            iconName = 'event';
                             break;
                         case 'Perfil':
                             iconName = 'person';
@@ -39,6 +48,8 @@ const BottomTabs = () => {
             })}
         >
             <Tab.Screen name="Início" component={TelaInicial} />
+            <Tab.Screen name="Comunicados" component={Comunicados} />
+            <Tab.Screen name="Calendário" component={Calendario} />
             <Tab.Screen name="Perfil" component={PerfilScreen} />
         </Tab.Navigator>
     );
