@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, TextInput, TouchableOpacity, FlatList, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, Modal, TextInput, TouchableOpacity, FlatList, StyleSheet, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const ComentariosBottomSheet = ({ visible, onClose, comentarios, onAddComentario }) => {
+const ComentariosBottomSheet = ({ visible, onClose, comentarios, onAddComentario, fotoPerfil }) => {
     const [novoComentario, setNovoComentario] = useState('');
 
     const enviarComentario = () => {
@@ -32,7 +32,14 @@ const ComentariosBottomSheet = ({ visible, onClose, comentarios, onAddComentario
                         keyExtractor={(_, idx) => idx.toString()}
                         renderItem={({ item }) => (
                             <View style={styles.comentarioItem}>
-                                <Icon name="account-circle" size={28} color="#49688d" />
+                                {item.avatar ? (
+                                    <Image
+                                        source={{ uri: item.avatar }}
+                                        style={styles.comentarioAvatar}
+                                    />
+                                ) : (
+                                    <Icon name="account-circle" size={28} color="#49688d" />
+                                )}
                                 <View style={{ flex: 1 }}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
                                         <Text style={styles.comentarioNome}>{item.nome}</Text>
@@ -97,6 +104,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 8,
+    },
+    comentarioAvatar: {
+        width: 28,
+        height: 28,
+        borderRadius: 14,
+        marginRight: 8,
     },
     comentarioNome: {
         fontWeight: 'bold',

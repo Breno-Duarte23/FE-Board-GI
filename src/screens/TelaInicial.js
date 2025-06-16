@@ -11,6 +11,8 @@ import Header from '../components/Header';
 import RecadoCard from '../components/RecadoCard';
 import ComentariosBottomSheet from '../components/ComentariosBottomSheet';
 import dayjs from 'dayjs';
+import { useAuth } from '../../AuthContext';
+import SHA256 from 'crypto-js/sha256';
 
 const STORAGE_COMENTARIOS = 'comentarios_recados';
 const STORAGE_LIDOS = 'recados_lidos';
@@ -92,6 +94,8 @@ const TelaInicial = ({ navigation }) => {
     const [comentariosVisiveis, setComentariosVisiveis] = useState(false);
     const [recadoParaAbrir, setRecadoParaAbrir] = useState(null);
 
+    const { userEmail } = useAuth();
+
     useEffect(() => {
         (async () => {
             setComentarios(await carregarComentarios());
@@ -144,6 +148,7 @@ const TelaInicial = ({ navigation }) => {
             nome: 'Breno',
             texto,
             dataHora: new Date().toLocaleString('pt-BR'),
+            avatar: fotoPerfil, // Adicione esta linha
         };
         setComentarios((prev) => {
             const atualizados = {
@@ -157,6 +162,13 @@ const TelaInicial = ({ navigation }) => {
     const marcarComoLido = (recadoId) => {
         setRecadosLidos((prev) => prev.includes(recadoId) ? prev : [...prev, recadoId]);
     };
+
+    const gerarFotoGravatar = (email) => {
+        const emailHash = SHA256(email.trim().toLowerCase()).toString();
+        return `https://www.gravatar.com/avatar/${emailHash}?d=identicon&s=400`;
+    };
+
+    const fotoPerfil = userEmail ? gerarFotoGravatar(userEmail) : null;
 
     return (
         <SafeAreaView style={styles.mainContainer}>
