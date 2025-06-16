@@ -1,16 +1,123 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
-    Text,
     View,
-    Image,
-    TouchableOpacity,
+    ScrollView,
     Alert,
     SafeAreaView
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../components/Header';
+import RecadoCard from '../components/RecadoCard';
+import ComentariosBottomSheet from '../components/ComentariosBottomSheet';
+import dayjs from 'dayjs';
+import { useAuth } from '../../AuthContext';
+import SHA256 from 'crypto-js/sha256';
+
+const STORAGE_COMENTARIOS = 'comentarios_recados';
+const STORAGE_LIDOS = 'recados_lidos';
+
+const salvarComentarios = async (comentarios) => {
+    await AsyncStorage.setItem(STORAGE_COMENTARIOS, JSON.stringify(comentarios));
+};
+
+const carregarComentarios = async () => {
+    const data = await AsyncStorage.getItem(STORAGE_COMENTARIOS);
+    return data ? JSON.parse(data) : {};
+};
+
+const salvarLidos = async (lidos) => {
+    await AsyncStorage.setItem(STORAGE_LIDOS, JSON.stringify(lidos));
+};
+
+const carregarLidos = async () => {
+    const data = await AsyncStorage.getItem(STORAGE_LIDOS);
+    return data ? JSON.parse(data) : [];
+};
+
+const recadosFicticios = [
+    {
+        id: 1,
+        titulo: 'Reunião de Pais',
+        descricao: 'Lembrete: reunião de pais nesta sexta-feira às 18h.',
+        dataHora: '16/06/2025 18:00',
+    },
+    {
+        id: 2,
+        titulo: 'Entrega de Boletins',
+        descricao: 'Os boletins serão entregues na próxima semana.',
+        dataHora: '15/06/2025 09:30',
+    },
+    {
+        id: 3,
+        titulo: 'Passeio Escolar',
+        descricao: 'Passeio ao museu agendado para o dia 20/06.',
+        dataHora: '14/06/2025 14:00',
+    },
+    {
+        id: 4,
+        titulo: 'Atividade Extracurricular',
+        descricao: 'Inscrições abertas para a atividade extracurricular de artes.',
+        dataHora: '13/06/2025 10:15',
+    },
+    {
+        id: 5,
+        titulo: 'Aviso Importante',
+        descricao: 'Mudança no horário das aulas a partir da próxima semana.',
+        dataHora: '12/06/2025 14:45',
+    },
+    {
+        id: 6,
+        titulo: 'Evento Cultural',
+        descricao: 'Participe do evento cultural da escola no próximo sábado.',
+        dataHora: '11/06/2025 16:00',
+    },
+    {
+        id: 7,
+        titulo: 'Palestra sobre Saúde Mental',
+        descricao: 'Palestra aberta a todos os pais e alunos sobre saúde mental.',
+        dataHora: '10/06/2025 19:00',
+    },
+    {
+        id: 8,
+        titulo: 'Feira de Ciências',
+        descricao: 'A feira de ciências acontecerá na próxima quarta-feira.',
+        dataHora: '09/06/2025 13:30',
+    },
+
+];
 
 const TelaInicial = ({ navigation }) => {
+    const [comentarios, setComentarios] = useState({});
+    const [recadosLidos, setRecadosLidos] = useState([]);
+    const [recadoSelecionado, setRecadoSelecionado] = useState(null);
+    const [comentariosVisiveis, setComentariosVisiveis] = useState(false);
+    const [recadoParaAbrir, setRecadoParaAbrir] = useState(null);
+
+    const { userEmail } = useAuth();
+
+    useEffect(() => {
+        (async () => {
+            setComentarios(await carregarComentarios());
+            setRecadosLidos(await carregarLidos());
+        })();
+    }, []);
+
+    useEffect(() => {
+        salvarComentarios(comentarios);
+    }, [comentarios]);
+
+    useEffect(() => {
+        salvarLidos(recadosLidos);
+    }, [recadosLidos]);
+
+    useEffect(() => {
+        if (recadoParaAbrir && recadosLidos.includes(recadoParaAbrir.id)) {
+            navigation.navigate('RecadoDetalhe', { recado: recadoParaAbrir });
+            setRecadoParaAbrir(null);
+        }
+    }, [recadosLidos, recadoParaAbrir, navigation]);
+
     const confirmarVoltar = () => {
         Alert.alert(
             "Sair da página",
@@ -22,64 +129,85 @@ const TelaInicial = ({ navigation }) => {
         );
     };
 
+    const abrirRecado = (recado) => {
+        if (!recadosLidos.includes(recado.id)) {
+            setRecadosLidos((prev) => prev.includes(recado.id) ? prev : [...prev, recado.id]);
+            setRecadoParaAbrir(recado);
+        } else {
+            navigation.navigate('RecadoDetalhe', { recado });
+        }
+    };
+
+    const abrirComentarios = (recadoId) => {
+        setRecadoSelecionado(recadoId);
+        setComentariosVisiveis(true);
+    };
+
+    const adicionarComentario = (texto) => {
+        const novoComentario = {
+            nome: 'Breno',
+            texto,
+            dataHora: new Date().toLocaleString('pt-BR'),
+            avatar: fotoPerfil, // Adicione esta linha
+        };
+        setComentarios((prev) => {
+            const atualizados = {
+                ...prev,
+                [recadoSelecionado]: [...(prev[recadoSelecionado] || []), novoComentario],
+            };
+            return atualizados;
+        });
+    };
+
+    const marcarComoLido = (recadoId) => {
+        setRecadosLidos((prev) => prev.includes(recadoId) ? prev : [...prev, recadoId]);
+    };
+
+    const gerarFotoGravatar = (email) => {
+        const emailHash = SHA256(email.trim().toLowerCase()).toString();
+        return `https://www.gravatar.com/avatar/${emailHash}?d=identicon&s=400`;
+    };
+
+    const fotoPerfil = userEmail ? gerarFotoGravatar(userEmail) : null;
+
     return (
         <SafeAreaView style={styles.mainContainer}>
-            
             <Header title="Sejam Bem Vindos!" onBackPress={confirmarVoltar} />
-            
-            <View style={styles.body}>
-                <View style={styles.btnsContainer}>
-                    <MenuButton
-                        label="Recados"
-                        imageSource={require('../../assets/book.png')}
-                        onPress={() => navigation.navigate('Recados')}
+            <ScrollView style={styles.scroll} contentContainerStyle={styles.body}>
+                {recadosFicticios.map((recado) => (
+                    <RecadoCard
+                        key={recado.id}
+                        titulo={recado.titulo}
+                        descricao={recado.descricao}
+                        dataHora={recado.dataHora}
+                        lido={recadosLidos.includes(recado.id)}
+                        onPress={() => abrirRecado(recado)}
+                        onComentarioPress={() => abrirComentarios(recado.id)}
                     />
-                    <MenuButton
-                        label="Comunicados"
-                        imageSource={require('../../assets/comunicados.png')}
-                        onPress={() => navigation.navigate('Comunicados')}
-                    />
-                    <MenuButton
-                        label="Alunos"
-                        imageSource={require('../../assets/aluno.png')}
-                        onPress={() => navigation.navigate('Alunos')}
-                    />
-                    <MenuButton
-                        label="Calendário"
-                        imageSource={require('../../assets/calendario.png')}
-                        onPress={() => navigation.navigate('Calendario')}
-                    />
-                </View>
-            </View>
+                ))}
+            </ScrollView>
+            <ComentariosBottomSheet
+                visible={comentariosVisiveis}
+                onClose={() => setComentariosVisiveis(false)}
+                comentarios={comentarios[recadoSelecionado] || []}
+                onAddComentario={adicionarComentario}
+            />
         </SafeAreaView>
     );
 };
 
-const MenuButton = ({ label, imageSource, onPress }) => (
-    <View style={styles.menuItem}>
-        <TouchableOpacity style={styles.mainBtnTouchable} onPress={onPress}>
-            <Image style={styles.imgMainButton} source={imageSource} />
-        </TouchableOpacity>
-        <Text style={styles.labelBtn} numberOfLines={1}>{label}</Text>
-    </View>
-);
 
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: '#FFFFFF',
     },
-    body: {
+    scroll: {
         flex: 1,
-        padding: 15,
     },
-    btnsContainer: {
-        padding: 30,
-        height: 400,
-        flexWrap: 'wrap',
-        flexDirection: 'row',
-        alignContent: 'flex-start',
-        justifyContent: 'space-between',
+    body: {
+        paddingVertical: 16,
+        paddingBottom: 32,
     },
     menuItem: {
         alignItems: 'center',

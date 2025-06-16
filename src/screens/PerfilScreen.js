@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import SHA256 from 'crypto-js/sha256';
 import { useAuth } from '../../AuthContext';
+import Header from '../components/Header';
 
 const PerfilScreen = () => {
   const { userEmail } = useAuth();
@@ -23,13 +24,15 @@ const PerfilScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Perfil do Usuário</Text>
-      <Image
-        source={{ uri: foto }}
-        style={styles.fotoPerfil}
-        defaultSource={require('../../assets/avatar-default.png')}
-      />
-      <Text style={styles.emailText}>{userEmail}</Text>
+      <Header title="Perfil do Usuário" />
+      <View style={styles.content}>
+        <Image
+          source={{ uri: foto }}
+          style={styles.fotoPerfil}
+          defaultSource={require('../../assets/avatar-default.png')}
+        />
+        <Text style={styles.emailText}>{userEmail}</Text>
+      </View>
     </View>
   );
 };
@@ -37,15 +40,14 @@ const PerfilScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#fff',
+    },
+    content: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-    },
-    title: {
-        fontSize: 24,
-        marginBottom: 20,
-        fontWeight: 'bold',
-    },
+    }, 
     fotoPerfil: {
         width: 220,
         height: 220,

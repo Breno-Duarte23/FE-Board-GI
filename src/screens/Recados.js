@@ -2,10 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
 
-const Recados = ({ navigation }) => {
+const Recados = () => {
     return (
         <View style={styles.mainContainer}>
-            <Header title="Recados" onBackPress={() => navigation.navigate('Home')} />
+            <Header title="Recados" />
             <Text style={styles.text}>Recados</Text>
         </View>
     );
