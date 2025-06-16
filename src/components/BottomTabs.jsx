@@ -16,10 +16,15 @@ const BottomTabs = () => {
                 headerShown: false,
                 tabBarActiveTintColor: '#007bff',
                 tabBarInactiveTintColor: 'gray',
-                tabBarShowLabel: false,
+                tabBarLabelStyle: {
+                    fontSize: 12, 
+                },
+                tabBarItemStyle: {
+                    flex: 1, 
+                },
                 tabBarStyle: {
                     backgroundColor: '#fff',
-                    height: 65,
+                    height: 70,
                     borderTopWidth: 0.5,
                     borderTopColor: '#ccc',
                 },
