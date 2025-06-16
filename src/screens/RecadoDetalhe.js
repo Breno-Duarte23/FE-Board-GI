@@ -8,10 +8,12 @@ const RecadoDetalhe = ({ route, navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <Header title="Detalhes do Recado" onBackPress={() => navigation.goBack()} />
-            <View style={styles.content}>
-                <Text style={styles.titulo}>{recado.titulo}</Text>
-                <Text style={styles.dataHora}>{recado.dataHora}</Text>
-                <Text style={styles.descricao}>{recado.descricao}</Text>
+            <View style={styles.centerContent}>
+                <View style={styles.content}>
+                    <Text style={styles.titulo}>{recado.titulo}</Text>
+                    <Text style={styles.dataHora}>{recado.dataHora}</Text>
+                    <Text style={styles.descricao}>{recado.descricao}</Text>
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -20,25 +22,36 @@ const RecadoDetalhe = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#F5F6FA',
+    },
+    centerContent: {
+        flex: 1,
+        alignItems: 'center',
     },
     content: {
-        flex: 1,
         padding: 24,
+        width: '95%',
+        backgroundColor: '#fff',
+        borderRadius: 12,
+        shadowColor: '#000',
+        shadowOpacity: 0.08,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        elevation: 4,
     },
     titulo: {
-        fontSize: 22,
+        fontSize: 26,
         fontWeight: 'bold',
         color: '#49688d',
         marginBottom: 12,
     },
     dataHora: {
-        fontSize: 14,
+        fontSize: 16,
         color: '#888',
         marginBottom: 20,
     },
     descricao: {
-        fontSize: 16,
+        fontSize: 18,
         color: '#333',
         lineHeight: 22,
     },

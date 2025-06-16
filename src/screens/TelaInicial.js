@@ -39,7 +39,7 @@ const recadosFicticios = [
     {
         id: 1,
         titulo: 'Reunião de Pais',
-        descricao: 'Lembrete: reunião de pais nesta sexta-feira às 18h.',
+        descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dapibus sed nunc ac finibus. In in nulla vitae metus maximus laoreet. Vivamus non vulputate elit, vel efficitur justo. Sed sed lorem dictum, porta lacus et, facilisis lacus. Phasellus condimentum sed mi vel tincidunt. Suspendisse lorem ligula, viverra vitae pellentesque sit amet, dapibus sed nibh. Ut volutpat dolor ut neque facilisis, ut pharetra leo imperdiet. Pellentesque consequat enim augue, volutpat pellentesque justo scelerisque eu. In a vestibulum erat. Morbi iaculis iaculis nibh, sed ullamcorper metus maximus viverra. Sed sit amet felis nisi. Fusce in accumsan metus, non pellentesque ligula.',
         dataHora: '16/06/2025 18:00',
     },
     {
