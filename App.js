@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TelaLogin from './src/screens/TelaLogin';
 import Recados from './src/screens/Recados';
 import Comunicados from './src/screens/Comunicados';
@@ -10,12 +10,23 @@ import EsqueciMinhaSenha from './src/screens/EsqueciMinhaSenha';
 import BottomTabs from './src/components/BottomTabs';
 import { AuthProvider } from './AuthContext';
 import RecadoDetalhe from './src/screens/RecadoDetalhe';
+import SplashScreen from './src/components/SplashScreen';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const App = () => {
   const Stack = createStackNavigator();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <SplashScreen />;
+  }
 
   return (
     <AuthProvider>

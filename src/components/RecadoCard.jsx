@@ -2,6 +2,13 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+const limitarDescricao = (descricao) => {
+    if (descricao.length > 100) {
+        return descricao.substring(0, 100) + '...';
+    }
+    return descricao;
+};
+
 const RecadoCard = ({
     titulo,
     descricao,
@@ -15,7 +22,7 @@ const RecadoCard = ({
             <View style={[styles.barra, { backgroundColor: lido ? '#2ecc40' : '#FCC911' }]} />
             <View style={styles.cardContent}>
                 <Text style={styles.titulo}>{titulo}</Text>
-                <Text style={styles.descricao}>{descricao}</Text>
+                <Text style={styles.descricao}>{limitarDescricao(descricao)}</Text>
                 <View style={styles.footer}>
                     <Text style={styles.data}>{dataHora}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
