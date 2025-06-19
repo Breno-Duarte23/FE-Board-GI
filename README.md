@@ -1,4 +1,3 @@
-
 # Board Gente Inocente
 
 Este é o **aplicativo mobile** do **Centro Educacional Gente Inocente**, desenvolvido com **React Native**. Nosso app busca proporcionar uma experiência digital moderna, intuitiva e eficiente para responsáveis por alunos e colaboradores da instituição.
@@ -82,6 +81,51 @@ if (lembrar) {
 ```
 
 Além disso, a tela de **Perfil** consome o e-mail armazenado e gera automaticamente a **imagem do perfil** através da API do **Gravatar**, garantindo uma personalização rápida e elegante.
+
+---
+## Arquitetura do Software
+
+![Diagrama da Arquitetura](image.png)
+
+A arquitetura do Educa Notas segue o padrão de aplicações React Native modernas, utilizando navegação baseada em stacks e tabs. O app é dividido em módulos de telas (screens), componentes reutilizáveis e contexto de autenticação. A navegação é gerenciada pelo React Navigation, permitindo transições entre telas como Login, Recados, Comunicados, Ocorrências, Alunos, Calendário e Detalhes de Recados. O contexto de autenticação (`AuthContext`) controla o estado de login do usuário em todo o app. Componentes como Header, BottomTabs e RecadoCard são reutilizados para garantir consistência visual e funcionalidade.
+
+---
+
+## Manual do Usuário
+
+### Navegação no App
+
+- **Tela de Login:**  
+  Ao abrir o app, você verá a tela de login. Insira suas credenciais para acessar as funcionalidades.
+
+- **Menu Inferior (Bottom Tabs):**  
+  Após o login, utilize o menu inferior para navegar entre as principais áreas:
+  - **Início:** Visão geral e atalhos rápidos.
+  - **Comunicados:** Veja comunicados importantes da escola.
+  - **Calendário:** Visualize eventos e adicione novos à sua agenda.
+  - **Perfil:** Acesse e edite suas informações pessoais.
+
+- **Recados:**  
+  Acesse a lista de recados. Toque em um recado para ver detalhes completos.
+
+- **Ocorrências:**  
+  Veja registros de ocorrências relacionadas ao aluno.
+
+- **Alunos:**  
+  Consulte informações dos alunos vinculados à sua conta.
+
+- **Detalhes:**  
+  Em qualquer lista, toque em um item para visualizar detalhes completos.
+
+- **Adicionar Evento ao Calendário:**  
+  Na tela de calendário, selecione uma data e toque em "Adicionar evento ao calendário" para criar um evento no seu Google Agenda.
+
+- **Esqueci Minha Senha:**  
+  Caso esqueça sua senha, utilize a opção na tela de login para recuperar o acesso.
+
+---
+
+Se precisar de mais informações, consulte a documentação técnica ou entre em contato com o suporte.
 
 ---
 
