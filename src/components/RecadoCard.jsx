@@ -102,4 +102,5 @@ const styles = StyleSheet.create({
     },
 });
 
+export { limitarDescricao };
 export default RecadoCard;
