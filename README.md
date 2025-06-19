@@ -3,19 +3,19 @@
 
 Este é o **aplicativo mobile** do **Centro Educacional Gente Inocente**, desenvolvido com **React Native**. Nosso app busca proporcionar uma experiência digital moderna, intuitiva e eficiente para responsáveis por alunos e colaboradores da instituição.
 
-## 🎯 Objetivo do Aplicativo
+##  Objetivo do Aplicativo
 
 O principal objetivo do nosso aplicativo é facilitar o **acesso à comunicação escolar**.
 
 ---
 
-## 🚀 Solução que propomos
+##  Solução que propomos
 
 Atualmente, muitos pais e responsáveis possuem dificuldades em manter uma comunicação eficiente com a escola, além de não terem fácil acesso às informações importantes dos alunos. Nosso app visa centralizar o acesso à **comunicação institucional** e - oferecer uma interface amigável, responsiva e adaptável..
 
 ---
 
-## 🛠️ Tecnologias e Dependências
+##  Tecnologias e Dependências
 
 Para rodar o projeto, você precisará ter o **Node.js** instalado.
 
@@ -34,7 +34,7 @@ Para rodar o projeto, você precisará ter o **Node.js** instalado.
 
 ---
 
-## 📦 Como clonar e rodar o app
+##  Como clonar e rodar o app
 
 ```bash
 # Clone o repositório
@@ -52,14 +52,14 @@ npx react-native run-android
 npx react-native run-ios
 ```
 
-**⚠️ Importante:**  
+** Importante:**  
 - Configure o Firebase no arquivo `firebaseConfig.js`.  
 - As imagens (`LogoGISemFundo.png`, `olhoAberto.png`, `olhoFechado.png`, `avatar-default.png`) devem estar dentro da pasta `assets`.  
 - Caso utilize Expo, adapte os comandos de execução.  
 
 ---
 
-## 📝 Sobre a implementação do AsyncStorage
+##  Sobre a implementação do AsyncStorage
 
 Para melhorar a **experiência do usuário** e evitar que ele tenha que digitar o e-mail e senha toda vez que abrir o app, implementamos uma **persistência local** utilizando o **AsyncStorage**.
 
@@ -85,17 +85,17 @@ Além disso, a tela de **Perfil** consome o e-mail armazenado e gera automaticam
 
 ---
 
-## 👥 Funcionalidades atuais
+##  Funcionalidades atuais
 
-✅ Autenticação com Firebase  
-✅ Armazenamento local das credenciais  
-✅ Exibição de imagem de perfil via Gravatar  
-✅ Navegação entre telas com Bottom Tabs  
-✅ Layout responsivo e intuitivo  
+- Autenticação com Firebase  
+- Armazenamento local das credenciais  
+- Exibição de imagem de perfil via Gravatar  
+- Navegação entre telas com Bottom Tabs  
+- Layout responsivo e intuitivo  
 
 ---
 
-## 💡 Próximos passos
+##  Próximos passos
 
 - Integração com notificações push.  
 - Implementação de módulo de comunicados escolares.  
@@ -104,7 +104,7 @@ Além disso, a tela de **Perfil** consome o e-mail armazenado e gera automaticam
 
 ---
 
-## 🏫 Centro Educacional Gente Inocente
+##  Centro Educacional Gente Inocente
 
 **Todos os direitos reservados © 2025**  
 
