@@ -4,7 +4,8 @@ import {
     View,
     ScrollView,
     Alert,
-    SafeAreaView
+    SafeAreaView,
+    BackHandler
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../components/Header';
@@ -117,6 +118,24 @@ const TelaInicial = ({ navigation }) => {
             setRecadoParaAbrir(null);
         }
     }, [recadosLidos, recadoParaAbrir, navigation]);
+
+    useEffect(() => {
+        const onBackPress = () => {
+            Alert.alert(
+                'Sair do aplicativo',
+                'Deseja realmente sair?',
+                [
+                    { text: 'Cancelar', style: 'cancel', onPress: () => {} },
+                    { text: 'Sim', onPress: () => BackHandler.exitApp() },
+                ]
+            );
+            return true; // impede o comportamento padrão
+        };
+
+        BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+        return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []);
 
     const confirmarVoltar = () => {
         Alert.alert(
