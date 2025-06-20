@@ -172,7 +172,7 @@ const TelaInicial = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.mainContainer}>
-            <Header title="Sejam Bem Vindos!" onBackPress={confirmarVoltar} />
+            <Header title="Sejam Bem Vindos!" />
             <ScrollView style={styles.scroll} contentContainerStyle={styles.body}>
                 {recadosFicticios.map((recado) => (
                     <RecadoCard

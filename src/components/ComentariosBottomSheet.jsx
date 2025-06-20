@@ -1,9 +1,42 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, FlatList, StyleSheet, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+const formatarDataHora = (dataString) => {
+    if (!dataString) return '';
+    // Expressão regular para pegar apenas data e hora:minuto
+    const match = dataString.match(/^(\d{2}\/\d{2}\/\d{4}),?\s*(\d{2}:\d{2})/);
+    if (match) {
+        return `${match[1]} ${match[2]}`;
+    }
+    return dataString; // Se não bater o padrão, retorna original
+};
+
 
 const ComentariosBottomSheet = ({ visible, onClose, comentarios, onAddComentario, fotoPerfil }) => {
     const [novoComentario, setNovoComentario] = useState('');
+
+    // Adicione os logs dentro do renderItem do FlatList
+    const renderComentario = ({ item }) => {
+        return (
+            <View style={styles.comentarioItem}>
+                {item.avatar ? (
+                    <Image
+                        source={{ uri: item.avatar }}
+                        style={styles.comentarioAvatar}
+                    />
+                ) : (
+                    <Icon name="account-circle" size={28} color="#49688d" />
+                )}
+                <View style={{ flex: 1 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
+                        <Text style={styles.comentarioNome}>{item.nome}</Text>
+                        <Text style={styles.comentarioData}>{formatarDataHora(item.dataHora)}</Text>
+                    </View>
+                    <Text style={styles.comentarioTexto}>{item.texto}</Text>
+                </View>
+            </View>
+        );
+    };
 
     const enviarComentario = () => {
         if (novoComentario.trim()) {
@@ -30,25 +63,7 @@ const ComentariosBottomSheet = ({ visible, onClose, comentarios, onAddComentario
                     <FlatList
                         data={comentarios}
                         keyExtractor={(_, idx) => idx.toString()}
-                        renderItem={({ item }) => (
-                            <View style={styles.comentarioItem}>
-                                {item.avatar ? (
-                                    <Image
-                                        source={{ uri: item.avatar }}
-                                        style={styles.comentarioAvatar}
-                                    />
-                                ) : (
-                                    <Icon name="account-circle" size={28} color="#49688d" />
-                                )}
-                                <View style={{ flex: 1 }}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
-                                        <Text style={styles.comentarioNome}>{item.nome}</Text>
-                                        <Text style={styles.comentarioData}>{item.dataHora}</Text>
-                                    </View>
-                                    <Text style={styles.comentarioTexto}>{item.texto}</Text>
-                                </View>
-                            </View>
-                        )}
+                        renderItem={renderComentario}
                         style={styles.lista}
                         ListEmptyComponent={<Text style={styles.semComentarios}>Nenhum comentário ainda.</Text>}
                     />
@@ -156,3 +171,4 @@ const styles = StyleSheet.create({
 });
 
 export default ComentariosBottomSheet;
+
