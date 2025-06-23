@@ -19,7 +19,10 @@ const RecadoCard = ({
 }) => {
     return (
         <TouchableOpacity style={styles.card} activeOpacity={0.9} onPress={onPress}>
-            <View style={[styles.barra, { backgroundColor: lido ? '#2ecc40' : '#FCC911' }]} />
+            <View style={[
+                styles.barra,
+                { backgroundColor: lido ? '#2ecc40' : '#FCC911' }
+            ]} />
             <View style={styles.cardContent}>
                 <Text style={styles.titulo}>{titulo}</Text>
                 <Text style={styles.descricao}>{limitarDescricao(descricao)}</Text>

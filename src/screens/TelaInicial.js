@@ -4,7 +4,8 @@ import {
     View,
     ScrollView,
     Alert,
-    SafeAreaView
+    SafeAreaView,
+    BackHandler
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../components/Header';
@@ -26,13 +27,13 @@ const carregarComentarios = async () => {
     return data ? JSON.parse(data) : {};
 };
 
-const salvarLidos = async (lidos) => {
-    await AsyncStorage.setItem(STORAGE_LIDOS, JSON.stringify(lidos));
+const carregarLidos = async () => {
+    const lidos = await AsyncStorage.getItem(STORAGE_LIDOS);
+    return lidos ? JSON.parse(lidos) : [];
 };
 
-const carregarLidos = async () => {
-    const data = await AsyncStorage.getItem(STORAGE_LIDOS);
-    return data ? JSON.parse(data) : [];
+const salvarLidos = async (lidos) => {
+    await AsyncStorage.setItem(STORAGE_LIDOS, JSON.stringify(lidos));
 };
 
 const recadosFicticios = [
@@ -118,6 +119,24 @@ const TelaInicial = ({ navigation }) => {
         }
     }, [recadosLidos, recadoParaAbrir, navigation]);
 
+    useEffect(() => {
+        const onBackPress = () => {
+            Alert.alert(
+                'Sair do aplicativo',
+                'Deseja realmente sair?',
+                [
+                    { text: 'Cancelar', style: 'cancel', onPress: () => {} },
+                    { text: 'Sim', onPress: () => BackHandler.exitApp() },
+                ]
+            );
+            return true; // impede o comportamento padrão
+        };
+
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+        return () => backHandler.remove();
+    }, []);
+
     const confirmarVoltar = () => {
         Alert.alert(
             "Sair da página",
@@ -159,8 +178,12 @@ const TelaInicial = ({ navigation }) => {
         });
     };
 
-    const marcarComoLido = (recadoId) => {
-        setRecadosLidos((prev) => prev.includes(recadoId) ? prev : [...prev, recadoId]);
+    const marcarComoLido = async (idRecado) => {
+        if (!recadosLidos.includes(idRecado)) {
+            const novosLidos = [...recadosLidos, idRecado];
+            setRecadosLidos(novosLidos);
+            await salvarLidos(novosLidos);
+        }
     };
 
     const gerarFotoGravatar = (email) => {
@@ -172,7 +195,7 @@ const TelaInicial = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.mainContainer}>
-            <Header title="Sejam Bem Vindos!" onBackPress={confirmarVoltar} />
+            <Header title="Sejam Bem Vindos!" />
             <ScrollView style={styles.scroll} contentContainerStyle={styles.body}>
                 {recadosFicticios.map((recado) => (
                     <RecadoCard
@@ -181,7 +204,12 @@ const TelaInicial = ({ navigation }) => {
                         descricao={recado.descricao}
                         dataHora={recado.dataHora}
                         lido={recadosLidos.includes(recado.id)}
-                        onPress={() => abrirRecado(recado)}
+                        onPress={() => {
+                            if (!recadosLidos.includes(recado.id)) {
+                                marcarComoLido(recado.id);
+                            }
+                            abrirRecado(recado);
+                        }}
                         onComentarioPress={() => abrirComentarios(recado.id)}
                     />
                 ))}
