@@ -17,6 +17,19 @@ const Calendario = () => {
             Alert.alert('Preencha todos os campos!');
             return;
         }
+        const [year, month, day] = selectedDate.split('-');
+        const dataEvento = new Date(
+            year,
+            parseInt(month, 10) - 1,
+            day,
+            horaEvento.getHours(),
+            horaEvento.getMinutes(),
+            0
+        );
+        if (dataEvento <= new Date()) {
+            Alert.alert('Selecione uma data e hora no futuro!');
+            return;
+        }
 
         const { status } = await CalendarExpo.requestPermissionsAsync();
         if (status !== 'granted') {
@@ -32,16 +45,7 @@ const Calendario = () => {
             return;
         }
 
-        // Monta a data/hora no formato ISO
-        const [year, month, day] = selectedDate.split('-');
-        const startDate = new Date(
-            year,
-            parseInt(month, 10) - 1,
-            day,
-            horaEvento.getHours(),
-            horaEvento.getMinutes(),
-            0
-        );
+        const startDate = dataEvento;
         const endDate = new Date(startDate.getTime() + 60 * 60 * 1000); // 1 hora de duração
 
         await CalendarExpo.createEventAsync(defaultCalendar.id, {
