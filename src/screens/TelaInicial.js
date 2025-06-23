@@ -132,9 +132,9 @@ const TelaInicial = ({ navigation }) => {
             return true; // impede o comportamento padrão
         };
 
-        BackHandler.addEventListener('hardwareBackPress', onBackPress);
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
-        return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        return () => backHandler.remove();
     }, []);
 
     const confirmarVoltar = () => {
