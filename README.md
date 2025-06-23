@@ -20,16 +20,31 @@ Para rodar o projeto, você precisará ter o **Node.js** instalado.
 
 ### **Dependências principais:**
 
-| Pacote | Finalidade |
-| --- | --- |
-| `react-native` | Desenvolvimento mobile cross-platform |
-| `react-navigation` | Navegação entre telas |
-| `@react-navigation/bottom-tabs` | Navegação por abas inferiores |
-| `react-native-vector-icons` | Ícones nas abas e botões |
-| `crypto-js` | Geração de hash SHA256 para integração com Gravatar |
-| `@react-native-async-storage/async-storage` | Armazenamento local de dados (email e senha) |
-| `firebase` | Autenticação de usuários |
-| `expo` | Ambiente de desenvolvimento (caso utilize Expo) |
+| Pacote                                   | Finalidade                                                    |
+|-------------------------------------------|---------------------------------------------------------------|
+| `react-native`                           | Desenvolvimento mobile cross-platform                         |
+| `react`                                  | Biblioteca base para interfaces React Native                  |
+| `expo`                                   | Ambiente de desenvolvimento e build (caso utilize Expo)       |
+| `@react-navigation/native`                | Navegação entre telas                                         |
+| `@react-navigation/bottom-tabs`           | Navegação por abas inferiores                                 |
+| `@react-navigation/stack`                 | Navegação por pilha (stack)                                   |
+| `react-native-vector-icons`               | Ícones nas abas e botões                                      |
+| `crypto-js`                              | Geração de hash SHA256 para integração com Gravatar           |
+| `@react-native-async-storage/async-storage` | Armazenamento local de dados (email, senha, recados lidos)    |
+| `firebase`                               | Autenticação de usuários                                      |
+| `expo-calendar`                          | Integração com calendário do dispositivo                      |
+| `expo-constants`                         | Acesso a constantes do ambiente Expo                          |
+| `expo-font`                              | Gerenciamento de fontes personalizadas                        |
+| `expo-splash-screen`                     | Tela de splash personalizada                                  |
+| `expo-status-bar`                        | Customização da status bar                                    |
+| `react-native-calendars`                 | Componente de calendário                                      |
+| `@react-native-community/datetimepicker` | Seletor nativo de data/hora                                   |
+| `react-native-gesture-handler`           | Gestos e navegação fluida                                     |
+| `react-native-reanimated`                | Animações performáticas                                       |
+| `react-native-safe-area-context`         | Ajuste para áreas seguras (notch, bordas)                     |
+| `react-native-screens`                   | Otimização de navegação                                       |
+| `md5`                                    | Geração de hash MD5 para fallback de avatar                   |
+| `react-native-get-random-values`         | Geração de valores aleatórios seguros                         |
 
 ---
 
